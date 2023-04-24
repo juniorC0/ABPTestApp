@@ -49,10 +49,10 @@ namespace ABPTestApp.Infrastructure.Persistance
 
         public async Task<List<Experiment>> GetExperimentsByNameAsync(string experimentName)
         {
-            var options = await _experimentDbContext.Experiments.Where(x => x.Name == experimentName)
+            var experiments = await _experimentDbContext.Experiments.Where(x => x.Name == experimentName)
                 .ToListAsync();
 
-            return options;
+            return experiments;
         }
 
         public async Task SaveChangesAsync()

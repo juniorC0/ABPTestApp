@@ -16,8 +16,8 @@ namespace ABPTestApp.Application.Services
         public async Task<Experiment> GetButtonColorAsync(string deviceToken)
         {
             var random = new Random();
-            var colors = await _repository.GetExperimentsByNameAsync("button-color");        
-            var rndColor = colors[random.Next(0, colors.Count)];
+            var colorExperiments = await _repository.GetExperimentsByNameAsync("button-color");        
+            var rndColor = colorExperiments[random.Next(0, colorExperiments.Count)];
             var devices = await _repository.GetAllAsync<Device>();
             var device = devices.FirstOrDefault(x => x.Token == deviceToken);
 
@@ -39,9 +39,60 @@ namespace ABPTestApp.Application.Services
             return newDevice.Experiment;
         }
 
-        public string GetPrice(string deviceToken)
+        public async Task<Experiment> GetPriceAsync(string deviceToken)
         {
-            return "";
+            var priceExperiments = await _repository.GetExperimentsByNameAsync("price");
+            int[] weights = new int[] { 75, 10, 5, 10 };
+            var devices = await _repository.GetAllAsync<Device>();
+            var device = devices.FirstOrDefault(x => x.Token == deviceToken);
+            
+            if (device is not null)
+            {
+                return device.Experiment;
+            }
+            
+            var rndPrice = GetWeightedRandom(priceExperiments, weights);
+
+            var newDevice = new Device()
+            {
+                Token = deviceToken,
+                Experiment = rndPrice,
+                ExperimentId = rndPrice.Id
+            };
+
+            await _repository.AddAsync(newDevice);
+            await _repository.SaveChangesAsync();
+
+            return newDevice.Experiment;
+        }
+
+        private Experiment GetWeightedRandom(List<Experiment> experiments, int[] weights)
+        {
+            if (experiments.Count != weights.Length)
+            {
+                throw new ArgumentException("The length of the experiments and weights arrays must be equal.");
+            }
+
+            if (experiments.Count < 1)
+            {
+                throw new InvalidOperationException("Count can`t be less than 1");
+            }
+
+            var totalWeight = weights.Sum();
+
+            var rnd = new Random().Next(0, totalWeight);
+
+            for (var i = 0; i < experiments.Count; i++)
+            {
+                if (rnd < weights[i])
+                {
+                    return experiments[i];
+                }
+
+                rnd -= weights[i];
+            }
+
+            return experiments.Last();
         }
     }
 }

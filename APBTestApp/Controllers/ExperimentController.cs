@@ -1,7 +1,5 @@
 ﻿using ABPTestApp.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace APBTestApp.API.Controllers
 {
@@ -33,9 +31,17 @@ namespace APBTestApp.API.Controllers
 
         [HttpGet]
         [Route("price")]
-        public IActionResult GetPrice([FromQuery] string deviceToken)
+        public async Task<IActionResult> GetPrice([FromQuery] string deviceToken)
         {
-            return Ok();
+            var experiment = await _experimentService.GetPriceAsync(deviceToken);
+
+            var result = new Dictionary<string, string>()
+            {
+                { "key", experiment.Name },
+                { "value", experiment.Option }
+            };
+
+            return Ok(result);
         }
     }
 }
