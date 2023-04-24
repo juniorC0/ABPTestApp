@@ -1,11 +1,10 @@
 ﻿namespace ABPTestApp.Domain
 {
-    public class Device
+    public class Device : BaseEntity
     {
-        public int Id { get; set; }
         public string Token { get; set; }
 
-        public string ExperimentId { get; set; }
+        public int ExperimentId { get; set; }
         public Experiment Experiment { get; set; }
     }
 }

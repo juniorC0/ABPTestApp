@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ABPTestApp.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 
@@ -8,11 +9,26 @@ namespace APBTestApp.API.Controllers
     [ApiController]
     public class ExperimentController : ControllerBase
     {
+        private readonly IExperimentService _experimentService;
+
+        public ExperimentController(IExperimentService experimentService)
+        {
+            _experimentService = experimentService;
+        }
+
         [HttpGet]
         [Route("button-color")]
-        public IActionResult GetButtonColor([FromQuery] string deviceToken)
+        public async Task<IActionResult> GetButtonColor([FromQuery] string deviceToken)
         {
-            return Ok();
+            var experiment = await _experimentService.GetButtonColorAsync(deviceToken);
+
+            var result = new Dictionary<string, string>()
+            {
+                { "key", experiment.Name },
+                { "value", experiment.Option }
+            };
+
+            return Ok(result);
         }
 
         [HttpGet]

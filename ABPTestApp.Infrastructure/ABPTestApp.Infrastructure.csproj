@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ABPTestApp.Application\ABPTestApp.Application.csproj" />
     <ProjectReference Include="..\ABPTestApp.Domain\ABPTestApp.Domain.csproj" />
   </ItemGroup>
 

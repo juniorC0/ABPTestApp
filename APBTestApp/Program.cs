@@ -1,3 +1,4 @@
+using ABPTestApp.API.Extensions;
 using APBTestApp.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.AddServices();
 
 var app = builder.Build();
+
+await app.SeedData();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

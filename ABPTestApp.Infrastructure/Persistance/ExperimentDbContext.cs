@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ABPTestApp.Infrastructure.Persistance
 {
-    public class ExperimantDbContext : DbContext
+    public class ExperimentDbContext : DbContext
     {
-        public ExperimantDbContext(DbContextOptions<ExperimantDbContext> options) : base(options)
+        public ExperimentDbContext(DbContextOptions<ExperimentDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
