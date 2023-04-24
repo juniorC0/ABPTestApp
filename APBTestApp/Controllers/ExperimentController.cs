@@ -18,7 +18,17 @@ namespace APBTestApp.API.Controllers
         [Route("button-color")]
         public async Task<IActionResult> GetButtonColor([FromQuery] string deviceToken)
         {
+            if (string.IsNullOrEmpty(deviceToken))
+            {
+                return BadRequest();
+            }
+
             var experiment = await _experimentService.GetButtonColorAsync(deviceToken);
+
+            if (experiment is null)
+            {
+                return NotFound();
+            }
 
             var result = new Dictionary<string, string>()
             {
@@ -33,7 +43,16 @@ namespace APBTestApp.API.Controllers
         [Route("price")]
         public async Task<IActionResult> GetPrice([FromQuery] string deviceToken)
         {
+            if (string.IsNullOrEmpty(deviceToken))
+            {
+                return BadRequest();
+            }
             var experiment = await _experimentService.GetPriceAsync(deviceToken);
+
+            if (experiment is null)
+            {
+                return NotFound();
+            }
 
             var result = new Dictionary<string, string>()
             {

@@ -12,16 +12,14 @@ namespace ABPTestApp.Application.Services
             _repository = repository;
         }
 
-
         public async Task<Experiment> GetButtonColorAsync(string deviceToken)
         {
-            var random = new Random();
-            var colorExperiments = await _repository.GetExperimentsByNameAsync("button-color");        
-            var rndColor = colorExperiments[random.Next(0, colorExperiments.Count)];
+            var colorExperiments = await _repository.GetExperimentsByNameAsync("button-color");
+            var rndColor = colorExperiments[new Random().Next(0, colorExperiments.Count)];
             var devices = await _repository.GetAllAsync<Device>();
             var device = devices.FirstOrDefault(x => x.Token == deviceToken);
 
-            if (device is not null)
+            if (device != null)
             {
                 return device.Experiment;
             }
@@ -30,7 +28,8 @@ namespace ABPTestApp.Application.Services
             {
                 Token = deviceToken,
                 Experiment = rndColor,
-                ExperimentId = rndColor.Id
+                ExperimentId = rndColor.Id,
+                CreationDate = DateTime.Now
             };
 
             await _repository.AddAsync(newDevice);
@@ -57,7 +56,8 @@ namespace ABPTestApp.Application.Services
             {
                 Token = deviceToken,
                 Experiment = rndPrice,
-                ExperimentId = rndPrice.Id
+                ExperimentId = rndPrice.Id,
+                CreationDate = DateTime.Now
             };
 
             await _repository.AddAsync(newDevice);
