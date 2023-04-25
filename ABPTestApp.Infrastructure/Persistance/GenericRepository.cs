@@ -35,6 +35,11 @@ namespace ABPTestApp.Infrastructure.Persistance
             return _experimentDbContext.Set<T>().ToListAsync();
         }
 
+        public Task<List<Device>> GetAllDevicesAsync()
+        {
+            return _experimentDbContext.Set<Device>().Include(d => d.Experiment).ToListAsync();
+        }
+
         public async Task<T> GetByIdAsync<T>(int id) where T : BaseEntity
         {
             var entity = await _experimentDbContext.Set<T>().FindAsync(id);

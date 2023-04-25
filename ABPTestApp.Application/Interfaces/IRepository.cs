@@ -9,6 +9,7 @@ namespace ABPTestApp.Application.Interfaces
         Task<List<Experiment>> GetExperimentsByNameAsync(string experimentName);
 
         Task<List<T>> GetAllAsync<T>() where T : BaseEntity;
+        Task<List<Device>> GetAllDevicesAsync();
 
         Task AddAsync<T>(T entity) where T : BaseEntity;
 

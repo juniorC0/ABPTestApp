@@ -1,0 +1,23 @@
+<div>
+  <h3>
+    Количество девайсов учавствующих в эксперименте button-color:
+    {{ buttonColorExperimentDevices.length }}
+  </h3>
+  <ul>
+    <li *ngFor="let count of buttonColorExperimentDevicesCountedByOptions">
+      {{ count.name }} - {{ count.count }}
+    </li>
+  </ul>
+</div>
+<br />
+<div>
+  <h3>
+    Количество девайсов учавствующих в эксперименте price:
+    {{ priceExperimentDevices.length }}
+  </h3>
+  <ul>
+    <li *ngFor="let count of priceExperimentDevicesCountedByOptions">
+      {{ count.name }} - {{ count.count }}
+    </li>
+  </ul>
+</div>
