@@ -66,6 +66,7 @@ namespace APBTestApp.API.Controllers
             return Ok(result);
         }
 
+        //Контроллер для получения всех девайсов для отображения статистики
         [HttpGet]
         [Route("all-devices")]
         public async Task<IActionResult> GetAllDevices()

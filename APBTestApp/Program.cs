@@ -14,6 +14,7 @@ builder.AddServices();
 
 var app = builder.Build();
 
+//Первоначальное наполение базы данными
 await app.SeedData();
 
 // Configure the HTTP request pipeline.

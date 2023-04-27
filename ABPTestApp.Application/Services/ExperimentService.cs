@@ -12,6 +12,7 @@ namespace ABPTestApp.Application.Services
             _repository = repository;
         }
 
+        //Присваивание девайсу случайной опции 
         public async Task<Experiment> GetButtonColorAsync(string deviceToken)
         {
             var colorExperiments = await _repository.GetExperimentsByNameAsync("button-color");
@@ -66,6 +67,8 @@ namespace ABPTestApp.Application.Services
             return newDevice.Experiment;
         }
 
+        //Для присваивания девайсу определенной опции в определенном проценте случаев я использовал алгоритм
+        //Weighted Random Selection
         private Experiment GetWeightedRandom(List<Experiment> experiments, int[] weights)
         {
             if (experiments.Count != weights.Length)
