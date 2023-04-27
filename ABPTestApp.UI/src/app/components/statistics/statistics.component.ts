@@ -12,28 +12,6 @@ export class StatisticsComponent implements OnInit {
   buttonColorExperimentDevices: Device[] = [];
   priceExperimentDevices: Device[] = [];
 
-  // constructor(private experimentService: ExperimentService) {}
-
-  // ngOnInit(): void {
-  //   // this.getButtonColorExperimentDevices();
-  //   // this.getPriceExperimentDevices();
-  // }
-
-  // getButtonColorExperimentDevices() {
-  //   this.experimentService.getAllDevices().subscribe((data: Device[]) => {
-  //     this.buttonColorExperimentDevices = data.filter(
-  //       (device) => device.experiment.name === 'button-color'
-  //     );
-  //   });
-  // }
-
-  // getPriceExperimentDevices() {
-  //   this.experimentService.getAllDevices().subscribe((data: Device[]) => {
-  //     this.priceExperimentDevices = data.filter(
-  //       (device) => device.experiment.name === 'price'
-  //     );
-  //   });
-  // }
   buttonColorExperimentDevicesCountedByOptions: {
     name: string;
     count: number;

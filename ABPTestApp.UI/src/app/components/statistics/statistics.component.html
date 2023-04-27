@@ -3,11 +3,35 @@
     Количество девайсов учавствующих в эксперименте button-color:
     {{ buttonColorExperimentDevices.length }}
   </h3>
-  <ul>
-    <li *ngFor="let count of buttonColorExperimentDevicesCountedByOptions">
-      {{ count.name }} - {{ count.count }}
-    </li>
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Название опции</th>
+        <th>Количество девайсов</th>
+        <th>Процентное соотношение относительно всех девайсов</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let count of buttonColorExperimentDevicesCountedByOptions;
+          let i = index
+        "
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ count.name }}</td>
+        <td>{{ count.count }}</td>
+        <td>
+          {{
+            ((count.count / buttonColorExperimentDevices.length) * 100).toFixed(
+              2
+            )
+          }}%
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <br />
 <div>
@@ -15,9 +39,31 @@
     Количество девайсов учавствующих в эксперименте price:
     {{ priceExperimentDevices.length }}
   </h3>
-  <ul>
-    <li *ngFor="let count of priceExperimentDevicesCountedByOptions">
-      {{ count.name }} - {{ count.count }}
-    </li>
-  </ul>
+  <table>
+    <thead>
+      <tr>
+        <th>№</th>
+        <th>Название опции</th>
+        <th>Количество девайсов</th>
+        <th>Процентное соотношение относительно всех девайсов</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="
+          let count of priceExperimentDevicesCountedByOptions;
+          let i = index
+        "
+      >
+        <td>{{ i + 1 }}</td>
+        <td>{{ count.name }}</td>
+        <td>{{ count.count }}</td>
+        <td>
+          {{
+            ((count.count / priceExperimentDevices.length) * 100).toFixed(2)
+          }}%
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
