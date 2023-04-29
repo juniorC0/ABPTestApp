@@ -97,5 +97,12 @@ namespace ABPTestApp.Application.Services
 
             return experiments.Last();
         }
+
+        public async Task<ICollection<Device>> GetAllDevicesAsync()
+        {
+            var devices = await _repository.GetAllDevicesAsync();
+
+            return devices;
+        }
     }
 }

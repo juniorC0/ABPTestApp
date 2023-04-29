@@ -1,5 +1,4 @@
 ﻿using ABPTestApp.Application.Interfaces;
-using ABPTestApp.Domain;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APBTestApp.API.Controllers
@@ -9,12 +8,10 @@ namespace APBTestApp.API.Controllers
     public class ExperimentController : ControllerBase
     {
         private readonly IExperimentService _experimentService;
-        private readonly IRepository _repository;
 
-        public ExperimentController(IExperimentService experimentService, IRepository repository)
+        public ExperimentController(IExperimentService experimentService)
         {
             _experimentService = experimentService;
-            _repository = repository;
         }
 
         [HttpGet]
@@ -71,7 +68,7 @@ namespace APBTestApp.API.Controllers
         [Route("all-devices")]
         public async Task<IActionResult> GetAllDevices()
         {
-            var allDevices = await _repository.GetAllDevicesAsync();
+            var allDevices = await _experimentService.GetAllDevicesAsync();
             return Ok(allDevices);
         }
     }

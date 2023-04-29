@@ -6,5 +6,6 @@ namespace ABPTestApp.Application.Interfaces
     {
         Task<Experiment> GetButtonColorAsync(string deviceToken);
         Task<Experiment> GetPriceAsync(string deviceToken);
+        Task<ICollection<Device>> GetAllDevicesAsync();
     }
 }
